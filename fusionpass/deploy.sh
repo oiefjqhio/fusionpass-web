@@ -56,7 +56,7 @@ server {
     gzip_types text/css application/javascript application/json image/svg+xml application/manifest+json;
 
     # Content-hashed build output: cache for a year. The shell and service worker: never.
-    location ~ ^/[0-9a-f]{40}/ { expires 1y; add_header Cache-Control "public, immutable"; try_files $uri =404; }
+    location ~ "^/[0-9a-f]{40}/" { expires 1y; add_header Cache-Control "public, immutable"; try_files $uri =404; }
     location = /index.html { add_header Cache-Control "no-cache"; }
     location = /service-worker.js { add_header Cache-Control "no-cache"; }
     location = /manifest.json { add_header Cache-Control "no-cache"; }
