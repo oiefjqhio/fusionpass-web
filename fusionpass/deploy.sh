@@ -13,7 +13,7 @@ COREPACK_ENABLE_DOWNLOAD_PROMPT=0 pnpm install --frozen-lockfile --silent
 COREPACK_ENABLE_DOWNLOAD_PROMPT=0 pnpm run build 2>&1 | grep -E "compiled|ERROR"
 
 "${B[@]}" 'mkdir -p /var/www/fusionpass-web'
-rsync -a --delete -e "ssh -i $KEY" build/ "$HOST:/var/www/fusionpass-web/"
+rsync -a --delete --exclude /app/ -e "ssh -i $KEY" build/ "$HOST:/var/www/fusionpass-web/"
 
 "${B[@]}" bash -s <<'REMOTE'
 set -euo pipefail
