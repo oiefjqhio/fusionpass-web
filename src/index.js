@@ -22,8 +22,10 @@ const { default: WebUpdateScreen } = require('./App/WebUpdateScreen');
 const { CoreProvider } = require('./core');
 const { FileDropProvider, PlatformProvider } = require('./common');
 
+// Fusion Pass: our name in every language.
+const rename = (v) => typeof v === 'string' ? v.replace(/Stremio/g, 'Fusion Pass') : v;
 const translations = Object.fromEntries(Object.entries(stremioTranslations()).map(([key, value]) => [key, {
-    translation: value
+    translation: Object.fromEntries(Object.entries(value).map(([k, v]) => [k, rename(v)]))
 }]));
 
 i18n

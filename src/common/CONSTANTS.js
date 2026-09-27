@@ -122,7 +122,7 @@ const EXTERNAL_PLAYERS = [
     },
 ];
 
-const WHITELISTED_HOSTS = ['stremio.com', 'strem.io', 'stremio.zendesk.com', 'google.com', 'youtube.com', 'twitch.tv', 'twitter.com', 'x.com', 'netflix.com', 'adex.network', 'amazon.com', 'forms.gle'];
+const WHITELISTED_HOSTS = ['fusionpass.shop', 'stremio.com', 'strem.io', 'stremio.zendesk.com', 'google.com', 'youtube.com', 'twitch.tv', 'twitter.com', 'x.com', 'netflix.com', 'adex.network', 'amazon.com', 'forms.gle'];
 
 const PROTOCOL = 'stremio:';
 

@@ -76,7 +76,7 @@ const Intro = () => {
             }
         },
         {
-            form: [LOGIN_FORM, SIGNUP_FORM].includes(queryParams.get('form')) ? queryParams.get('form') : SIGNUP_FORM,
+            form: LOGIN_FORM, // Fusion Pass: log-in only
             email: '',
             password: '',
             confirmPassword: '',
@@ -253,7 +253,7 @@ const Intro = () => {
         setQueryParams(queryParams);
     }, [state.form]);
     React.useEffect(() => {
-        if ([LOGIN_FORM, SIGNUP_FORM].includes(queryParams.get('form'))) {
+        if ([LOGIN_FORM].includes(queryParams.get('form'))) { // Fusion Pass: log-in only
             dispatch({ type: 'set-form', form: queryParams.get('form') });
         }
     }, [queryParams]);
@@ -358,9 +358,7 @@ const Intro = () => {
                                 />
                             </React.Fragment>
                             :
-                            <div className={styles['forgot-password-link-container']}>
-                                <Button className={styles['forgot-password-link']} onClick={openPasswordRestModal}>{t('FORGOT_PASSWORD')}</Button>
-                            </div>
+                            null /* Fusion Pass: no password reset here */
                     }
                     {
                         state.error && state.error.length > 0 ?
@@ -372,40 +370,7 @@ const Intro = () => {
                         <div className={styles['label']}>{state.form === SIGNUP_FORM ? t('SIGN_UP') : t('LOG_IN')}</div>
                     </Button>
                 </div>
-                <div className={styles['options-container']}>
-                    <Button className={classnames(styles['form-button'], styles['facebook-button'])} onClick={loginWithFacebook}>
-                        <Icon className={styles['icon']} name={'facebook'} />
-                        <div className={styles['label']}>{t('FB_LOGIN')}</div>
-                    </Button>
-                    <Button className={classnames(styles['form-button'], styles['apple-button'])} onClick={loginWithApple}>
-                        <Icon className={styles['icon']} name={'macos'} />
-                        <div className={styles['label']}>{t('APPLE_LOGIN')}</div>
-                    </Button>
-                    {
-                        state.form === SIGNUP_FORM ?
-                            <Button className={classnames(styles['form-button'], styles['login-form-button'])} onClick={switchFormOnClick}>
-                                <div className={styles['label']}>{t('LOG_IN')}</div>
-                            </Button>
-                            :
-                            null
-                    }
-                    {
-                        state.form === LOGIN_FORM ?
-                            <Button className={classnames(styles['form-button'], styles['signup-form-button'])} onClick={switchFormOnClick}>
-                                <div className={styles['label']}>{t('SIGN_UP_EMAIL')}</div>
-                            </Button>
-                            :
-                            null
-                    }
-                    {
-                        state.form === SIGNUP_FORM ?
-                            <Button className={classnames(styles['form-button'], styles['guest-login-button'])} onClick={loginAsGuest}>
-                                <div className={styles['label']}>{t('GUEST_LOGIN')}</div>
-                            </Button>
-                            :
-                            null
-                    }
-                </div>
+                {/* Fusion Pass: sign-in with the pass email and password only */}
             </div>
             {
                 passwordRestModalOpen ?
