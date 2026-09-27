@@ -296,10 +296,10 @@ const Intro = () => {
                     <Image className={styles['logo']} src={require('/assets/images/logo.png')} alt={' '} />
                 </div>
                 <div className={styles['title-container']}>
-                    {t('WEBSITE_SLOGAN_NEW_NEW')}
+                    {'Welcome back'}
                 </div>
                 <div className={styles['slogan-container']}>
-                    {t('WEBSITE_SLOGAN_ALL')}
+                    {'Use the email and password from your pass.'}
                 </div>
             </div>
             <div className={styles['content-container']}>

@@ -28,7 +28,7 @@ const NavMenuContent = ({ onClick }) => {
     const [fullscreen, requestFullscreen, exitFullscreen, , supported] = useFullscreen();
     const [, isAndroidPWA] = usePWA();
     const streamingServerWarningDismissed = React.useMemo(() => {
-        return streamingServer.settings !== null && streamingServer.settings.type === 'Ready' || (
+        return true || streamingServer.settings !== null && streamingServer.settings.type === 'Ready' || ( // Fusion Pass
             !isNaN(profile.settings.streamingServerWarningDismissed.getTime()) &&
             profile.settings.streamingServerWarningDismissed.getTime() > Date.now()
         );

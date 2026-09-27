@@ -142,6 +142,60 @@ edit(f'{SRC}/common/CONSTANTS.js', [
     ("const WHITELISTED_HOSTS = ['stremio.com',", "const WHITELISTED_HOSTS = ['fusionpass.shop', 'stremio.com',"),
 ])
 
+# 8. Our own log-in copy, and no "install the streaming server" nags (playback goes to the
+#    browser or an external player; the Stremio server is never part of Fusion Pass).
+edit(f'{SRC}/routes/Intro/Intro.js', [
+    ("{t('WEBSITE_SLOGAN_NEW_NEW')}", "{'Welcome back'}"),
+    ("{t('WEBSITE_SLOGAN_ALL')}", "{'Log in with your Fusion Pass email and password.'}"),
+])
+edit(f'{SRC}/routes/Board/Board.js', [
+    ("        return streamingServer.settings !== null && streamingServer.settings.type === 'Err' && (",
+     "        return false && streamingServer.settings !== null && streamingServer.settings.type === 'Err' && ( // Fusion Pass"),
+])
+edit(f'{SRC}/components/NavBar/HorizontalNavBar/NavMenu/NavMenuContent.js', [
+    ("        return streamingServer.settings !== null && streamingServer.settings.type === 'Ready' || (",
+     "        return true || streamingServer.settings !== null && streamingServer.settings.type === 'Ready' || ( // Fusion Pass"),
+])
+
+# 9. Settings: our support/legal/source links; no Trakt (owner decision, same as the apps), and no
+#    password change or account deletion here (they would split the pass login; done on our site).
+G = f'{SRC}/routes/Settings/General/General.tsx'
+edit(G, [
+    ("href={'https://stremio.zendesk.com/hc/en-us'}", f"href={{'{SITE}/setup'}}"),
+    ("href={`https://github.com/stremio/stremio-web/tree/${process.env.COMMIT_HASH}`}",
+     "href={`https://github.com/oiefjqhio/fusionpass-web/tree/${process.env.COMMIT_HASH}`}"),
+    ("""                href={'https://www.stremio.com/tos'}
+            />""", f"""                href={{'{SITE}/terms'}}
+            />"""),
+    ("""                href={'https://www.stremio.com/privacy'}
+            />""", f"""                href={{'{SITE}/privacy'}}
+            />"""),
+    ("""            {
+                profile?.auth?.user &&
+                    <Link
+                        label={t('SETTINGS_ACC_DELETE')}
+                        href={'https://stremio.zendesk.com/hc/en-us/articles/360021428911-How-to-delete-my-account'}
+                    />
+            }
+            {
+                profile?.auth?.user?.email &&
+                    <Link
+                        label={t('SETTINGS_CHANGE_PASSWORD')}
+                        href={`https://www.strem.io/reset-password/${profile.auth.user.email}`}
+                    />
+            }
+            <Option className={styles['trakt-container']} icon={'trakt'} label={t('SETTINGS_TRAKT')}>
+                <Button className={'button'} title={isTraktAuthenticated ? t('LOG_OUT') : t('SETTINGS_TRAKT_AUTHENTICATE')} disabled={profile.auth === null} tabIndex={-1} onClick={onToggleTrakt}>
+                    {isTraktAuthenticated ? t('LOG_OUT') : t('SETTINGS_TRAKT_AUTHENTICATE')}
+                </Button>
+            </Option>
+""", """            {/* Fusion Pass: no account deletion, password change or Trakt here */}
+"""),
+])
+edit(f'{SRC}/routes/Intro/Intro.js', [
+    ("{'Log in with your Fusion Pass email and password.'}", "{'Use the email and password from your pass.'}"),
+])
+
 print('rebrand: ok,', len(changed), 'changes')
 for c in changed[:80]:
     print('  ', c)

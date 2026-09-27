@@ -118,39 +118,21 @@ const General = forwardRef<HTMLDivElement, Props>(({ profile }: Props, ref) => {
             }
             <Link
                 label={t('SETTINGS_SUPPORT')}
-                href={'https://stremio.zendesk.com/hc/en-us'}
+                href={'https://fusionpass.shop/setup'}
             />
             <Link
                 label={t('SETTINGS_SOURCE_CODE')}
-                href={`https://github.com/stremio/stremio-web/tree/${process.env.COMMIT_HASH}`}
+                href={`https://github.com/oiefjqhio/fusionpass-web/tree/${process.env.COMMIT_HASH}`}
             />
             <Link
                 label={t('TERMS_OF_SERVICE')}
-                href={'https://www.stremio.com/tos'}
+                href={'https://fusionpass.shop/terms'}
             />
             <Link
                 label={t('PRIVACY_POLICY')}
-                href={'https://www.stremio.com/privacy'}
+                href={'https://fusionpass.shop/privacy'}
             />
-            {
-                profile?.auth?.user &&
-                    <Link
-                        label={t('SETTINGS_ACC_DELETE')}
-                        href={'https://stremio.zendesk.com/hc/en-us/articles/360021428911-How-to-delete-my-account'}
-                    />
-            }
-            {
-                profile?.auth?.user?.email &&
-                    <Link
-                        label={t('SETTINGS_CHANGE_PASSWORD')}
-                        href={`https://www.strem.io/reset-password/${profile.auth.user.email}`}
-                    />
-            }
-            <Option className={styles['trakt-container']} icon={'trakt'} label={t('SETTINGS_TRAKT')}>
-                <Button className={'button'} title={isTraktAuthenticated ? t('LOG_OUT') : t('SETTINGS_TRAKT_AUTHENTICATE')} disabled={profile.auth === null} tabIndex={-1} onClick={onToggleTrakt}>
-                    {isTraktAuthenticated ? t('LOG_OUT') : t('SETTINGS_TRAKT_AUTHENTICATE')}
-                </Button>
-            </Option>
+            {/* Fusion Pass: no account deletion, password change or Trakt here */}
             {
                 discord.available &&
                     <Option className={styles['discord-container']} icon={'discord'} label={'SETTINGS_DISCORD'}>
