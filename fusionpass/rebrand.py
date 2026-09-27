@@ -146,7 +146,7 @@ edit(f'{SRC}/common/CONSTANTS.js', [
 #    browser or an external player; the Stremio server is never part of Fusion Pass).
 edit(f'{SRC}/routes/Intro/Intro.js', [
     ("{t('WEBSITE_SLOGAN_NEW_NEW')}", "{'Welcome back'}"),
-    ("{t('WEBSITE_SLOGAN_ALL')}", "{'Log in with your Fusion Pass email and password.'}"),
+    ("{t('WEBSITE_SLOGAN_ALL')}", "{'Use the email and password from your pass.'}"),
 ])
 edit(f'{SRC}/routes/Board/Board.js', [
     ("        return streamingServer.settings !== null && streamingServer.settings.type === 'Err' && (",
@@ -191,9 +191,6 @@ edit(G, [
             </Option>
 """, """            {/* Fusion Pass: no account deletion, password change or Trakt here */}
 """),
-])
-edit(f'{SRC}/routes/Intro/Intro.js', [
-    ("{'Log in with your Fusion Pass email and password.'}", "{'Use the email and password from your pass.'}"),
 ])
 
 print('rebrand: ok,', len(changed), 'changes')
