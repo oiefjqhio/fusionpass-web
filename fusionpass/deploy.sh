@@ -3,6 +3,8 @@
 # First run also creates the nginx vhost and the Let's Encrypt cert (DNS record already exists,
 # orange-cloud). Later runs just rebuild and re-upload.   Usage: fusionpass/deploy.sh
 set -euo pipefail
+echo "Retired 2026-09-27: watch.fusionpass.shop now serves the Nuvio-based app (oiefjqhio/fusionpass-webapp). Refusing to overwrite it." >&2
+exit 1
 cd "$(dirname "$0")/.."
 KEY=/root/.ssh/srvl_fleet
 HOST=root@149.56.140.29
